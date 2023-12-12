@@ -10,3 +10,4 @@ open('LandCover_35MPT.tif', 'r')
 
 #hey guys 
 
+#laraisleuk
