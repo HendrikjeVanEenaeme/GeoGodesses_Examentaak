@@ -11,3 +11,8 @@ open('LandCover_35MPT.tif', 'r')
 #hey guys 
 
 #laraisleuk
+
+from osgeo import gdal, osr
+from dateutil.relativedelta import relativedelta
+import matplotlib.pyplot as plt
+import numpy as np
