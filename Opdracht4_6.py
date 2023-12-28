@@ -12,7 +12,8 @@ from osgeo import gdal
 from osgeo import osr
 
 image_folder = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Optical_images"
-output_folder = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Output_"
+output_folder_ndvi = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Output_/output_ndvi"
+output_folder_savi = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Output_/output_savi"
 
 for filename in os.listdir(image_folder):
     if filename.endswith(".tif"):  
@@ -100,13 +101,13 @@ for filename in os.listdir(image_folder):
             plt.imshow(ndvi_result, cmap='YlGn', vmin=0, vmax=1)
             plt.title(f"NDVI Map - {filename}")
             plt.colorbar(label="NDVI Value")
-            plt.savefig(os.path.join(output_folder, f"ndvi_map_{filename}"))
+            plt.savefig(os.path.join(output_folder_ndvi, f"ndvi_map_{filename}"))
             plt.close()
 
             plt.imshow(savi_result, cmap='YlGn', vmin=0, vmax=1)
             plt.title(f"SAVI Map - {filename}")
             plt.colorbar(label="SAVI Value")
-            plt.savefig(os.path.join(output_folder, f"savi_map_{filename}"))
+            plt.savefig(os.path.join(output_folder_savi, f"savi_map_{filename}"))
             plt.close()
 
         except FileNotFoundError:
