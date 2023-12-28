@@ -10,10 +10,30 @@ import numpy as np
 import matplotlib.pyplot as plt
 from osgeo import gdal
 from osgeo import osr
+import shutil
+
 
 image_folder = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Optical_images"
-output_folder_ndvi = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Output_/output_ndvi"
-output_folder_savi = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Output_/output_savi"
+output_folder_MPT = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Optical_images/mpt"
+output_folder_MQS = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Optical_images/mqs"
+
+for filename in os.listdir(image_folder):
+    if filename.endswith("MPT.tif"):  
+        source_path = os.path.join(image_folder, filename)
+        destination_path = os.path.join(output_folder_MPT, filename)
+        # Move the file to the optical_images_MPT folder
+        shutil.move(source_path, destination_path)   
+    elif filename.endswith("MQS.tif"):
+        source_path = os.path.join(image_folder, filename)
+        destination_path = os.path.join(output_folder_MQS, filename)
+        # Move the file to the optical_images_MQS folder
+        shutil.move(source_path, destination_path)  
+
+
+output_folder_MPT_ndvi = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Output_/output_MPT/ndvi"
+output_folder_MPT_savi = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Output_/output_MPT/savi"
+output_folder_MQS_ndvi = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Output_/output_MQS/ndvi"
+output_folder_MQS_savi = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Output_/output_MQS/savi"
 
 for filename in os.listdir(image_folder):
     if filename.endswith(".tif"):  
