@@ -10,6 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from osgeo import gdal
 from osgeo import osr
+import GIS_functions as gis
 
 
 image_folder = "C:/Users/larak/OneDrive/Geografie/3e BAC/Environmental programming/Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Optical_images"
@@ -28,12 +29,12 @@ for filename in os.listdir(image_folder):
             # Move the relevant code inside the loop
             gdal.UseExceptions()
 
-            def get_gdalwarp_info(filename, subdataset=0):
+            def get_gdalwarp_info(filename, subdataset=0, bandnumber=1):
                 dataset = gdal.Open(filename, gdal.GA_ReadOnly)
                 tpe = dataset.GetDriver().ShortName
                 if tpe == 'HDF4':
                     dataset = gdal.Open(dataset.GetSubDatasets()[subdataset][0])
-                ndv = str(dataset.GetRasterBand(1).GetNoDataValue())
+                ndv = str(dataset.GetRasterBand(bandnumber).GetNoDataValue())
                 if ndv == 'None':
                     ndv = 'nan'
                 srs = dataset.GetProjectionRef()
@@ -43,20 +44,6 @@ for filename in os.listdir(image_folder):
                     print("srs not defined, using EPSG4326.")
                 return srs, ndv
 
-            def get_gdalwarp_info(filename, subdataset=0):
-                dataset = gdal.Open(filename, gdal.GA_ReadOnly)
-                tpe = dataset.GetDriver().ShortName
-                if tpe == 'HDF4':
-                    dataset = gdal.Open(dataset.GetSubDatasets()[subdataset][0])
-                ndv = str(dataset.GetRasterBand(2).GetNoDataValue())
-                if ndv == 'None':
-                    ndv = 'nan'
-                srs = dataset.GetProjectionRef()
-                if not srs:
-                    srs = osr.SpatialReference()
-                    srs.ImportFromEPSG(4326).ExportToPrettyWkt()
-                    print("srs not defined, using EPSG4326.")
-                return srs, ndv
 
             def open_as_array(filename, bandnumber=1, nan_values=True):
                 dataset = gdal.Open(filename, gdal.GA_ReadOnly)
