@@ -11,7 +11,7 @@ import numpy as np
 
 gdal.UseExceptions()
     
-def get_gdalwarp_info(fih, subdataset=0):
+def get_gdalwarp_info(fih, subdataset=0, bandnumber=1):
     """
     Get information in string format from a geotiff or HDF4 file for use by GDALWARP.
 
@@ -37,7 +37,7 @@ def get_gdalwarp_info(fih, subdataset=0):
     tpe = dataset.GetDriver().ShortName
     if tpe == 'HDF4':
         dataset = gdal.Open(dataset.GetSubDatasets()[subdataset][0])
-    ndv = str(dataset.GetRasterBand(1).GetNoDataValue())
+    ndv = str(dataset.GetRasterBand(bandnumber).GetNoDataValue())
     if ndv == 'None':
         ndv = 'nan'
     srs = dataset.GetProjectionRef()
@@ -88,9 +88,9 @@ def moving_average(date, filehandles, filedates,
         assert indice >= (moving_avg_length - 1) / 2, "Not enough data available to calculate central average of length {0}".format(moving_avg_length)
         assert indice < len(filedates) - (moving_avg_length - 1) / 2, "Not enough data available to calculate central average of length {0}".format(moving_avg_length)
         to_open = filehandles[indice-(moving_avg_length-1)/2:indice+(moving_avg_length-1)/2+1]
-    summed_data = open_as_array(filehandles[indice]) * 0
+    summed_data = open_as_array(filehandles[indice], nan_values=False) * 0
     for fih in to_open:
-        data = open_as_array(fih)
+        data = open_as_array(fih, nan_values=False)
         summed_data += data
     summed_data /= len(to_open)
     return summed_data
@@ -133,7 +133,8 @@ def sort_files(input_dir, year_position, month_position=None,
     months = np.array([])
     days = np.array([])
     filehandles = np.array([])
-    files = list_files_in_folder(input_dir, extension=extension)
+    # Modified this to sort based on date
+    files = sorted(list_files_in_folder(input_dir, extension=extension))
     for fil in files:
         filehandles = np.append(filehandles, fil)
         year = int(fil[year_position[0]:year_position[1]])
@@ -326,6 +327,7 @@ def open_as_array(fih, bandnumber=1, nan_values=True):
     else:
         subdataset = dataset.GetRasterBand(bandnumber)
         ndv = subdataset.GetNoDataValue()
+        print(ndv)
     array = subdataset.ReadAsArray()
     if nan_values:
         if len(array[array == ndv]) >0:
