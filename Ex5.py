@@ -6,7 +6,7 @@ Created on Thu Jan  4 16:00:52 2024
 """
 
 import GIS_functions as gis
-import matplotlib.pyplot as plt
+
 
 from Ex4 import calc_NDVI, calc_SAVI
 
@@ -40,17 +40,7 @@ for optical_image in gis.list_files_in_folder("DATA/Optical_images"): #insert fi
                        geot=geot,
                        projection=projection)
     
-    plt.figure()
-    plt.imshow(NDVI, cmap='YlGn', vmin=0, vmax=100)
-    plt.title(f"NDVI Map - {filename}")
-    plt.colorbar(label="NDVI Value")
-    plt.savefig(f"OUT/Optical_images/{location}/JPEG_MAPS/{filename}.jpeg", dpi = 600)
-    
-    plt.figure()
-    plt.imshow(SAVI, cmap='YlGn', vmin=0, vmax=100)
-    plt.title(f"SAVI Map - {filename}")
-    plt.colorbar(label="SAVI Value")
-    plt.savefig(f"OUT/Optical_images/{location}/JPEG_MAPS/{filename}.jpeg", dpi = 600)
+
     
     
   
