@@ -7,13 +7,14 @@ Created on Thu Jan  4 16:00:49 2024
 
 import GIS_functions as gis
 import numpy as np
+import os
 import pandas as pd
 
 #Create an empty Pandas dataframe to store information in python
 area_df = pd.DataFrame()
 
 #To loop through each file in the DATA/Land_Cover_images folder, get geospatial info on the current land cover image and extract location information from the filename by splitting it up
-for land_cover_image in gis.list_files_in_folder("DATA/Land_Cover_images"):
+for land_cover_image in gis.list_files_in_folder(os.path.join("Data", "Land_Cover_images")):
     geo_info = gis.get_geoinfo(land_cover_image)
     location = land_cover_image.split('/')[-1].removesuffix('.tif').split('_')[-1]
     
@@ -38,4 +39,3 @@ for land_cover_image in gis.list_files_in_folder("DATA/Land_Cover_images"):
 
 #Setting a multi-level index using the columns 'Location' and 'Land cover type'
 area_df = area_df.set_index(keys=["Location", "Land cover type"])
-

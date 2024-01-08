@@ -26,9 +26,9 @@ for location, land_cover_type in area_df.index:
     for index_type in INDEX_TYPE:
         # index_average_array is the array containing the calculated index averages
         # per pixel
-        index_average_array = gis.open_as_array(f"OUT/Index_averages/{location}_{index_type}_average.tif")
+        index_average_array = gis.open_as_array(os.path.join('OUT', 'Index_averages', f'{location}_{index_type}_average.tif'))
         # land_cover array is the array containing the land cover type per pixel
-        land_cover_array = gis.open_as_array(f"DATA/Land_Cover_images/LandCover_{location}.tif")
+        land_cover_array = gis.open_as_array(os.path.join('DATA', 'Land_Cover_images', f'LandCover_{location}.tif'))
 
         # For a given location and land cover type, we calculate the mean (disregarding NaN-values) 
         # of the index averages on pixels corresponding to that land cover type. We can filter on 
@@ -37,4 +37,3 @@ for location, land_cover_type in area_df.index:
         # that corresponds to that index, and with the multi-index of that row being the corresponding
         # location and land cover type
         area_df.loc[(location, land_cover_type), f"Average {index_type}"] = np.nanmean(index_average_array[np.where(land_cover_array==land_cover_type)])
-
