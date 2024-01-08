@@ -2,7 +2,7 @@
 Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Optical_images/20210606T080611_20210606T081237_T35MPT.jpg
 *.jpg
 Topic10_Axel_Environmental_Analysis_using_Remote_Sensing_data/DATA/Optical_images/.DS_Store
-
+__pycache__/GIS_functions.cpython-311.pyc
 
 .env
 requirements.txt

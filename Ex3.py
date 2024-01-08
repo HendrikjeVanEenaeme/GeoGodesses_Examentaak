@@ -11,14 +11,10 @@ import os
 
 from Ex2 import area_df
 
-# Extract unique locations from the index of the area_df DataFrame by dropping land cover type
 locations = area_df.index.droplevel(level="Land cover type").unique()
 
-#Loop through each location
 for location in locations:
-    # Filter the DataFrame for the current location and extract the relative area of land cover types
     relative_area_land_cover_type = area_df[area_df.index.isin([location], level="Location")]["% of total area location"]
-    # Extract unique land cover types for the current location
     land_cover_types = relative_area_land_cover_type.index.droplevel(level="Location").unique()
 
 #Create a pie chart with title and legend that shows the relative area of land cover type and save as jpeg
