@@ -327,7 +327,6 @@ def open_as_array(fih, bandnumber=1, nan_values=True):
     else:
         subdataset = dataset.GetRasterBand(bandnumber)
         ndv = subdataset.GetNoDataValue()
-        print(ndv)
     array = subdataset.ReadAsArray()
     if nan_values:
         if len(array[array == ndv]) >0:
