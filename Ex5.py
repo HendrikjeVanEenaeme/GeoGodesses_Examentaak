@@ -17,7 +17,8 @@ from Ex4 import calc_NDVI, calc_SAVI
 #create a loop for all files in optical images folder
 #create variables filename and location to structure the output
 for optical_image in gis.list_files_in_folder(os.path.join("DATA","Optical_images")): 
-    filename = optical_image.split('/')[-1]
+    filename = os.path.basename(optical_image)
+    print(fil)
     location = filename.removesuffix(".tif").split('_')[-1].removeprefix("T")
 
 #calling metadata of the source files

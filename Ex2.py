@@ -16,7 +16,7 @@ area_df = pd.DataFrame()
 #To loop through each file in the DATA/Land_Cover_images folder, get geospatial info on the current land cover image and extract location information from the filename by splitting it up
 for land_cover_image in gis.list_files_in_folder(os.path.join("Data", "Land_Cover_images")):
     geo_info = gis.get_geoinfo(land_cover_image)
-    location = land_cover_image.split('/')[-1].removesuffix('.tif').split('_')[-1]
+    location = os.path.basename(land_cover_image).removesuffix('.tif').split('_')[-1]
     
     #calculate the total number of pixels
     total_number_pixels = geo_info[2] * geo_info[3]
