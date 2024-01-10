@@ -9,7 +9,6 @@ import GIS_functions as gis
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-
 from Ex4 import calc_NDVI, calc_SAVI
 
 
