@@ -37,3 +37,11 @@ for location, land_cover_type in area_df.index:
         # that corresponds to that index, and with the multi-index of that row being the corresponding
         # location and land cover type
         area_df.loc[(location, land_cover_type), f"Average {index_type}"] = np.nanmean(index_average_array[np.where(land_cover_array==land_cover_type)])
+
+
+
+
+
+
+
+
