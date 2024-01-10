@@ -41,13 +41,13 @@ for location in ["35MPT", "35MQS"]:
         
         
         #We create an average NDVI and average SAVI map per location 
-        mapname = index_average_filename.removesuffix(".tif")
+        mapname = os.path.basename(index_average_filename).removesuffix(".tif")
         
         plt.figure()
         plt.imshow(index_average_array, cmap='YlGn', vmin=0, vmax=1)
         plt.title(f" Average Map - {mapname}")
         plt.colorbar(label="Value")
-        plt.savefig(f'{os.path.join("OUT", "index_averages", "JPEG_MAPS_averages", mapname)}.jpeg', dpi = 600)
+        plt.savefig(f'{os.path.join("OUT", "Index_averages", "JPEG_MAPS_averages", mapname)}.jpeg', dpi = 600)
         plt.close()
 
  
