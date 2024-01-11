@@ -7,7 +7,6 @@ Created on Thu Jan  4 13:28:33 2024
 
 import GIS_functions as gis
 import matplotlib.pyplot as plt
-import numpy as np
 import os
 
 #We go over each land_cover_image in a loop and open them as arrays using GIS_functions
