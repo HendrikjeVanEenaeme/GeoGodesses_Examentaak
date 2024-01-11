@@ -26,7 +26,7 @@ for land_cover_image in gis.list_files_in_folder(os.path.join("Data", "Land_Cove
     #To count pixel values (=land cover type) and how often they occure 
     land_cover_types, pixel_counts = np.unique(pixel_values, return_counts=True)
     #To calculate the absolute and relative area of each land cover type in square kilometres ans as a percentage of the total area
-    absolute_area_land_cover_type = pixel_counts / 10000
+    absolute_area_land_cover_type = pixel_counts / 1000000
     relative_area_land_cover_type = (pixel_counts / total_number_pixels) *100
     
     #Creating Pandas Dataframe to store the results for the current image 
