@@ -4,7 +4,7 @@ Created on Thu Jan  4 16:03:46 2024
 
 @author: hendr
 """
-import pandas as pd
+
 import os
 
 from Ex7 import area_df
